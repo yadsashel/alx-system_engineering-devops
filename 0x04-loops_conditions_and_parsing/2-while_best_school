@@ -2,8 +2,8 @@
 #This script displays "Best School" 10 times
 #We use here while loop
 
-BestSchool=1
-while [ $BestSchool -le 10 ]; do
+BestSchool=0
+while [ $BestSchool -lt 10 ]; do
      echo "Best School"
-    ((count++))
+    let BestSchool=BestSchool+1
 done
