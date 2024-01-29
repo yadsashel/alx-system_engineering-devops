@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
+# This script displays "Best School" 10 times,
+# but for the 9th iteration, displays "Best School" and then "Hi" on a new line.
 
-"""
-This script displays Best School 10 times,
-printing Hi on a new line after the 9th iteration.
-"""
-
-school_repeater=0
-
-while [ $school_repeater -lt 10 ]; do
-  echo "Best School"
-  if [ $school_repeater -eq 9 ]; then
-    echo "Hi"
-  fi
-  school_repeater=$((school_repeater + 1))
+BestSchool=1
+while [ $BestSchool -le 10 ]; do
+    if [ $BestSchool -eq 9 ]; then
+        echo "Best School"
+        echo "Hi"
+    else
+        echo "Best School"
+    fi
+    ((BestSchool++))
 done
 
