@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
-#bash script that install ngix server
+# This script installs and starts the Nginx web server and sets up a custom page
 
-sudo apt-get update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-sudo echo "Holberton School" | /var/www/html/index.html
-sudo service nginx start
+# Update package lists
+apt-get update
+
+# Install Nginx
+apt-get install nginx -y
+
+# Start Nginx service
+service nginx start
+
+# Create a custom HTML file
+echo 'Hello World!' > /var/www/html/index.html
