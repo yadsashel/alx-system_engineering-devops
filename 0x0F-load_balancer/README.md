@@ -46,3 +46,43 @@ X-Served-By: 03-web-01
 sylvain@ubuntu$ curl -sI 54.89.38.100 | grep X-Served-By
 X-Served-By: 03-web-02
 sylvain@ubuntu$
+```
+File: 0-custom_http_response_header
+
+1. Install your load balancer
+Requirements:
+
+Install and configure HAproxy on lb-01
+Configure HAproxy to send traffic to web-01 and web-02
+Distribute requests using a round-robin algorithm
+Ensure HAproxy can be managed via an init script
+Ensure servers are configured with the correct hostnames
+Example:
+
+```bash
+Copy code
+sylvain@ubuntu$ curl -Is 54.210.47.110
+HTTP/1.1 200 OK
+Server: nginx/1.4.6 (Ubuntu)
+Date: Mon, 27 Feb 2017 06:12:17 GMT
+Content-Type: text/html
+Content-Length: 30
+Last-Modified: Tue, 21 Feb 2017 07:21:32 GMT
+Connection: keep-alive
+ETag: "58abea7c-1e"
+X-Served-By: 03-web-01
+Accept-Ranges: bytes
+```
+File: 1-install_load_balancer
+
+2. Add a custom HTTP header with Puppet
+Requirements:
+
+Automate the task of creating a custom HTTP header with Puppet
+The custom HTTP header must be X-Served-By
+The value of the custom HTTP header must be the hostname of the server Nginx is running on
+Write 2-puppet_custom_http_response_header.pp to configure a new Ubuntu machine
+File: 2-puppet_custom_http_response_header.pp
+
+Author
+Yazide Salhi
