@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Ensure script is run as root
+if [ "$EUID" -ne 0 ]; then
+  echo "Please run as root"
+  exit
+fi
+
+# Install Nginx if not already installed
+apt-get update
+apt-get install -y nginx
+
+# Copy Nginx configuration from web-01 to web-02
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_backup
+cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default_web-02
+
+# Modify Nginx configuration for web-02
+sed -i 's/^\tserver_name _;/\tserver_name web-02;/g' /etc/nginx/sites-available/default_web-02
+
+# Restart Nginx to apply changes
+systemctl restart nginx
