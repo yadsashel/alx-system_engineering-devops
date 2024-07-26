@@ -1,21 +1,7 @@
 #!/usr/bin/env bash
-# This script configures Nginx to run as the nginx user and listen on port 8080
-
-if ! command -v nginx &> /dev/null
-then
-    echo "Nginx not found. Installing Nginx..."
-    apt-get update
-    apt-get install -y nginx
-fi
-
-sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/listen 80 default_server;/listen 8080 default_server;/' /etc/nginx/sites-available/default
-sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:8080 default_server;/' /etc/nginx/sites-available/default
-
-if ! id -u nginx > /dev/null 2>&1; then
-    useradd -r nginx
-fi
-
-chown -R nginx:nginx /var/www/html
-
-service nginx restat
+#a script that Run Nginx as Nginx
+sudo pkill apache2
+sleep 2
+sudo chmod 777 /etc/nginx/nginx.conf
+sed -i 's/80/8080/g' /etc/nginx/sites-enabled/default
+sudo -u nginx nginx
